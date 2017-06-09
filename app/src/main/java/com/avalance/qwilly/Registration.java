@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.avalance.qwilly.Model.DbLink;
 
@@ -137,16 +138,15 @@ public class Registration extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            Log.e("inputLine:", inputLine);
+           // Log.e("inputLine:", inputLine);
 
-         /*   try {
+            try {
                 JSONObject Object=new JSONObject(inputLine);
-                Log.e("Re:", String.valueOf(Object));
                 output=Object.getString("re");
-                Log.e("Re:", output);
+
             } catch (Exception e) {
                 e.printStackTrace();
-            }*/
+            }
 
             return output;
         }
@@ -155,14 +155,17 @@ public class Registration extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            et_smobile.setText("");
-            et_spassword.setText("");
-            et_sname.setText("");
+            if(s.equals("success")){
+                et_smobile.setText("");
+                et_spassword.setText("");
+                et_sname.setText("");
 
-            Intent intent=new Intent(Registration.this,Login.class);
-            startActivity(intent);
-
-
+                Intent intent=new Intent(Registration.this,Login.class);
+                startActivity(intent);
+            }else
+            {
+                Toast.makeText(Registration.this,"Please try again..! "+s,Toast.LENGTH_LONG).show();
+            }
         }
     }
 }
