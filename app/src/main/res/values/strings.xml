@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Qwilly</string>
+    <string name="login">  &#032; LOGIN &#032; </string>
+    <string name="signup">SIGN UP</string>
+    <string name="hint_mobile_no">Mobile No.</string>
+    <string name="hint_password">Password</string>
+    <string name="forget_password_text">FORGOT PASSWORD?</string>
+    <string name="or">OR</string>
+    <string name="facebook">facebook</string>
+    <string name="google">google</string>
+    <string name="hint_name">Name</string>
+    <string name="btn_register">REGISTER</string>
+</resources>
