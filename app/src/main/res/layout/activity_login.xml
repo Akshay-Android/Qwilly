@@ -48,7 +48,7 @@
             android:rotation="+90"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Button"
             android:textColor="#e31c15"
-            android:text="@string/login" />
+            android:text="  LOGIN  " />
 
         <LinearLayout
             android:layout_width="5dp"
