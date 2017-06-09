@@ -103,23 +103,7 @@ public class Registration extends AppCompatActivity {
         protected String doInBackground(String... strings) {
 
             URL url;
-            String inputLine;
-
-            try {
-
-                jsonObject= new JSONObject();
-                jsonObject.put("operation","register");
-                jsonObject.put("user_name",sname);
-                jsonObject.put("user_mobile",smobile);
-                jsonObject.put("user_password",spass);
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            String json= String.valueOf(jsonObject);
-            String json1=json.replace(" ","%20");
-            Log.e("jsonObject is:", json);
+            String inputLine = null;
 
             try {
                 url=new URL(DbLink.Url);
@@ -129,7 +113,10 @@ public class Registration extends AppCompatActivity {
                 urlConnection.setDoOutput(true);
 
                 String req_data= URLEncoder.encode("Content-type", "UTF-8" ) +"="+ URLEncoder.encode("application/json","UTF-8")
-                        +"&"+URLEncoder.encode("json","UTF-8") +"="+ URLEncoder.encode(json1,"UTF-8");
+                                 +"&"+URLEncoder.encode("operation","UTF-8") +"="+ URLEncoder.encode("registration","UTF-8")
+                                 +"&"+URLEncoder.encode("user_name","UTF-8") +"="+ URLEncoder.encode(sname,"UTF-8")
+                                 +"&"+URLEncoder.encode("user_mobile","UTF-8") +"="+ URLEncoder.encode(smobile,"UTF-8")
+                                 +"&"+URLEncoder.encode("user_password","UTF-8") +"="+ URLEncoder.encode(spass,"UTF-8");
 
                 OutputStream os = urlConnection.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
@@ -150,7 +137,7 @@ public class Registration extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-           // Log.e("inputLine:", inputLine);
+            Log.e("inputLine:", inputLine);
 
          /*   try {
                 JSONObject Object=new JSONObject(inputLine);
