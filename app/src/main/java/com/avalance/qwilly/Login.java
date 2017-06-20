@@ -2,6 +2,7 @@ package com.avalance.qwilly;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.avalance.qwilly.Model.DbLink;
@@ -29,9 +31,11 @@ import java.net.URLEncoder;
 public class Login extends AppCompatActivity {
 
     LinearLayout layout_signup;
+    ConstraintLayout login;
     Button btn_login;
     EditText et_lmobile,et_lpass;
     String lmobile,lpass,output;
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +45,8 @@ public class Login extends AppCompatActivity {
        // overridePendingTransition(R.anim.activity_open_translate,R.anim.activity_close_scale);
 
         layout_signup = (LinearLayout) findViewById(R.id.layout_signup);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        login = (ConstraintLayout) findViewById(R.id.login);
         et_lmobile = (EditText) findViewById(R.id.et_lmobile);
         et_lpass = (EditText) findViewById(R.id.et_lpass);
         btn_login = (Button) findViewById(R.id.btn_login);
@@ -97,6 +103,12 @@ public class Login extends AppCompatActivity {
     }
 
     private class CheckLogin extends AsyncTask<String,String,String> {
+
+        @Override
+        protected void onPreExecute() {
+            login.setVisibility(View.GONE);
+            progressBar.setVisibility(View.VISIBLE);
+        }
 
         @Override
         protected String doInBackground(String... strings) {
@@ -157,11 +169,14 @@ public class Login extends AppCompatActivity {
                 et_lmobile.setText("");
                 et_lpass.setText("");
 
-               /* Intent intent=new Intent(Login.this,Home.class);
-                startActivity(intent);*/
+                Intent intent=new Intent(Login.this,Home.class);
+                startActivity(intent);
+
+                progressBar.setVisibility(View.GONE);
             }else
             {
                 Toast.makeText(Login.this,"Please try again..! "+s,Toast.LENGTH_LONG).show();
+                login.setVisibility(View.VISIBLE);
             }
         }
     }

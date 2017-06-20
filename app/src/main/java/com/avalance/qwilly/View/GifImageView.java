@@ -60,6 +60,8 @@ public class GifImageView extends View {
         long now = SystemClock.uptimeMillis();
 
         if (mStart == 0) {
+
+
             mStart = now;
         }
 

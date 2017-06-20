@@ -2,6 +2,7 @@ package com.avalance.qwilly;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.avalance.qwilly.Model.DbLink;
@@ -35,6 +37,8 @@ public class Registration extends AppCompatActivity {
     Button btn_signup;
     String sname,smobile,spass;
     JSONObject jsonObject;
+    ConstraintLayout signup;
+    ProgressBar progressBar;
     static String output = null;
 
     @Override
@@ -46,6 +50,8 @@ public class Registration extends AppCompatActivity {
        // overridePendingTransition(R.anim.activity_open_scale,R.anim.activity_close_translate);
 
         layout_login = (LinearLayout) findViewById(R.id.layout_login);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        signup = (ConstraintLayout) findViewById(R.id.signup);
         layout_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,6 +105,12 @@ public class Registration extends AppCompatActivity {
     }
 
     private class GerRegistration extends AsyncTask<String,String,String> {
+
+        @Override
+        protected void onPreExecute() {
+            signup.setVisibility(View.GONE);
+            progressBar.setVisibility(View.VISIBLE);
+        }
 
         @Override
         protected String doInBackground(String... strings) {
@@ -162,9 +174,11 @@ public class Registration extends AppCompatActivity {
 
                 Intent intent=new Intent(Registration.this,Login.class);
                 startActivity(intent);
+                progressBar.setVisibility(View.GONE);
             }else
             {
                 Toast.makeText(Registration.this,"Please try again..! "+s,Toast.LENGTH_LONG).show();
+                signup.setVisibility(View.VISIBLE);
             }
         }
     }
