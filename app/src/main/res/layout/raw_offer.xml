@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:background="@color/white"
+    android:orientation="vertical" android:layout_width="300dp"
+    android:background="@drawable/shadow"
+    android:layout_margin="7dp"
     android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:padding="16dp"
+        android:padding="7dp"
         android:id="@+id/show_hotel"
         android:weightSum="1">
 
     <ImageView
-        android:id="@+id/hotel_image"
+        android:id="@+id/offer_image"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="0.4"
-        android:layout_marginRight="16dp"
+        android:layout_weight="0.5"
+        android:layout_marginRight="10dp"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/placeholder"
         android:contentDescription="@string/app_name" />
@@ -30,33 +31,33 @@
         android:orientation="vertical">
 
         <com.avalance.qwilly.Text.Text
-            android:id="@+id/hotel_name"
+            android:id="@+id/offer_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:textSize="17sp"
+            android:textSize="16sp"
+            android:layout_marginTop="3dp"
             android:textColor="#2c3e50" />
 
         <com.avalance.qwilly.Text.MediumText
-            android:id="@+id/hotel_distance"
+            android:id="@+id/offer_des"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:textStyle="bold"
             android:textSize="13sp"
-            android:drawableLeft="@drawable/location"
             android:drawablePadding="5dp"
             android:textColor="@color/gray" />
 
         <com.avalance.qwilly.Text.MediumText
-            android:id="@+id/hotel_address"
+            android:id="@+id/offer_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLines="3"
-            android:textSize="13sp"
+            android:textSize="16sp"
             android:layout_marginTop="3dp"
             android:lineSpacingExtra="3dp"
-            android:textColor="@color/gray" />
+            android:textColor="#2c3e50"  />
 
     </LinearLayout>
 
@@ -64,7 +65,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/darkgray"/>
+        android:layout_height="3dp"
+        android:background="@color/colorAccent"/>
 
 </LinearLayout>

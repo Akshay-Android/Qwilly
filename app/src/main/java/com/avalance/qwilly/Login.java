@@ -169,7 +169,7 @@ public class Login extends AppCompatActivity {
                 et_lmobile.setText("");
                 et_lpass.setText("");
 
-                Intent intent=new Intent(Login.this,Home.class);
+                Intent intent=new Intent(Login.this,Prehome.class);
                 startActivity(intent);
 
                 progressBar.setVisibility(View.GONE);

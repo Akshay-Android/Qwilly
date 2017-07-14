@@ -1,34 +1,23 @@
-package com.avalance.qwilly.Fragment;
+package com.avalance.qwilly;
 
-import android.Manifest;
-import android.content.Context;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationManager;
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.avalance.qwilly.Model.DbLink;
 import com.avalance.qwilly.Model.Hotel;
-import com.avalance.qwilly.R;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -45,80 +34,52 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment {
-
+public class Prehome extends AppCompatActivity {
     private List<Hotel> movieList = new ArrayList<>();
     private RecyclerView recyclerView;
     private HotelAdapter mAdapter;
     String output;
     double longitude=73.165933,latitude=22.310891;
+    static String TAG="";
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_prehome);
 
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-
-        recyclerView = (RecyclerView) view.findViewById(R.id.home_view);
-
-
+        recyclerView = (RecyclerView) findViewById(R.id.home_view);
 
         mAdapter = new HotelAdapter(movieList);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-
         GetHotelsList getHotelsList= new GetHotelsList();
         getHotelsList.execute();
-
-        return view;
     }
 
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        Toolbar toolbar= (Toolbar) getActivity().findViewById(R.id.toolbar);
-        toolbar.setNavigationIcon(R.drawable.menu);
-        toolbar.setTitle("");
-        TextView textView= (TextView) getActivity().findViewById(R.id.title);
-        textView.setText("Home");
-
-        toolbar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DrawerLayout drawer = (DrawerLayout) getActivity().findViewById(R.id.drawer_layout);
-                drawer.isDrawerOpen(GravityCompat.START);
-            }
-        });
-
-    }
-
-
-
-
-    public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.MyViewHolder> {
+    class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.MyViewHolder> {
 
         private List<Hotel> hotelList;
 
-        public class MyViewHolder extends RecyclerView.ViewHolder {
-            public TextView hotel_name, hotel_distance, hotel_address;
-           // public RatingBar hotel_rating;
-            public ImageView hotel_image;
+        class MyViewHolder extends RecyclerView.ViewHolder {
+            TextView hotel_name, hotel_distance, hotel_address;
+            // public RatingBar hotel_rating;
+            ImageView hotel_image;
+            LinearLayout show_hotel;
 
-            public MyViewHolder(View view) {
+            MyViewHolder(View view) {
                 super(view);
                 hotel_name = (TextView) view.findViewById(R.id.hotel_name);
                 hotel_distance = (TextView) view.findViewById(R.id.hotel_distance);
                 hotel_address = (TextView) view.findViewById(R.id.hotel_address);
                 hotel_image = (ImageView) view.findViewById(R.id.hotel_image);
+                show_hotel = (LinearLayout) view.findViewById(R.id.show_hotel);
             }
         }
 
 
-        public HotelAdapter(List<Hotel> hotelList) {
+        HotelAdapter(List<Hotel> hotelList) {
             this.hotelList = hotelList;
         }
 
@@ -130,6 +91,7 @@ public class HomeFragment extends Fragment {
             return new MyViewHolder(itemView);
         }
 
+        @SuppressLint("SetTextI18n")
         @Override
         public void onBindViewHolder(MyViewHolder holder, int position) {
             Hotel hotel = hotelList.get(position);
@@ -137,9 +99,27 @@ public class HomeFragment extends Fragment {
             holder.hotel_distance.setText(hotel.getHotel_distance()+" Km");
             holder.hotel_address.setText(hotel.getHotel_address());
 
-            Picasso.with(getContext())
+            Picasso.with(Prehome.this)
                     .load(hotel.getHotel_imageUrl())
                     .into(holder.hotel_image);
+
+
+            holder.show_hotel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent intent=new Intent(Prehome.this,Home.class);
+                    startActivity(intent);
+
+                   /* Fragment fragment = new HotelFragment();
+                    if (fragment != null) {
+                        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.content_frame, fragment,TAG);
+                        ft.addToBackStack(null);
+                        ft.commit();
+                    }*/
+                }
+            });
         }
 
         @Override
@@ -176,10 +156,6 @@ public class HomeFragment extends Fragment {
 
                 inputLine=reader.readLine();
 
-                if(inputLine!=null)
-                {
-                    String res1=inputLine+"\n";
-                }
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -191,7 +167,7 @@ public class HomeFragment extends Fragment {
 
                 JSONArray jsonArray=Object.getJSONArray("rag");
 
-                movieList = new ArrayList<Hotel>();
+                movieList = new ArrayList<>();
                 for(int i=0;i<jsonArray.length();i++)
                 {
                     JSONObject object=jsonArray.getJSONObject(i);
@@ -245,6 +221,4 @@ public class HomeFragment extends Fragment {
             mAdapter.notifyDataSetChanged();
         }
     }
-
-
 }

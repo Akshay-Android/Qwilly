@@ -2,10 +2,11 @@ package com.avalance.qwilly;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -17,9 +18,7 @@ import android.widget.Toast;
 
 import com.avalance.qwilly.Model.DbLink;
 
-import org.json.JSONException;
 import org.json.JSONObject;
-
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -36,7 +35,6 @@ public class Registration extends AppCompatActivity {
     EditText et_sname,et_smobile,et_spassword;
     Button btn_signup;
     String sname,smobile,spass;
-    JSONObject jsonObject;
     ConstraintLayout signup;
     ProgressBar progressBar;
     static String output = null;
@@ -104,6 +102,7 @@ public class Registration extends AppCompatActivity {
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
     private class GerRegistration extends AsyncTask<String,String,String> {
 
         @Override
@@ -140,11 +139,6 @@ public class Registration extends AppCompatActivity {
                 BufferedReader reader=new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 
                 inputLine=reader.readLine();
-
-                if(inputLine!=null)
-                {
-                    String res1=inputLine+"\n";
-                }
 
             } catch (Exception e) {
                 e.printStackTrace();

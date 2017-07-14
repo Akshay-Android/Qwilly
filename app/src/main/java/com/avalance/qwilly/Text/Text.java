@@ -8,11 +8,11 @@ import android.widget.TextView;
 
 
 @SuppressLint("AppCompatCustomView")
-public class MediumText extends TextView {
+public class Text extends TextView {
 
-    public MediumText(Context context, AttributeSet attrs) {
+    public Text(Context context, AttributeSet attrs) {
         super(context, attrs);
-        this.setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/montserrat-light_[allfont.net].ttf"));
+        this.setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/museo_slab_500.otf"));
     }
 }
 

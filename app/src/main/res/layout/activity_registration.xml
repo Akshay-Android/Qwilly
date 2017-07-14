@@ -45,7 +45,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp">
 
-        <com.avalance.qwilly.Text.MediumText
+        <com.avalance.qwilly.Text.RText
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
@@ -81,7 +81,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp">
 
-        <com.avalance.qwilly.Text.MediumText
+        <com.avalance.qwilly.Text.RText
             android:layout_width="wrap_content"
             android:layout_height="70dp"
             android:gravity="center"

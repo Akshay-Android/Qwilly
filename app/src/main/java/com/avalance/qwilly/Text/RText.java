@@ -8,11 +8,12 @@ import android.widget.TextView;
 
 
 @SuppressLint("AppCompatCustomView")
-public class MediumText extends TextView {
+public class RText extends TextView {
 
-    public MediumText(Context context, AttributeSet attrs) {
+    public RText(Context context, AttributeSet attrs) {
         super(context, attrs);
-        this.setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/montserrat-light_[allfont.net].ttf"));
+        this.setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/Roboto-Medium.ttf"));
     }
+
 }
 

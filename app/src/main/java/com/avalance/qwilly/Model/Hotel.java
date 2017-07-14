@@ -6,6 +6,7 @@ package com.avalance.qwilly.Model;
 
 public class Hotel {
 
+
     private String hotel_name;
     private String hotel_distance;
     private String hotel_address;
@@ -13,6 +14,44 @@ public class Hotel {
     private String hotel_rating;
     private String hotel_phone;
     private String hotel_id;
+
+    private String offer_name;
+
+    public String getOffer_name() {
+        return offer_name;
+    }
+
+    public void setOffer_name(String offer_name) {
+        this.offer_name = offer_name;
+    }
+
+    public String getOffer_des() {
+        return offer_des;
+    }
+
+    public void setOffer_des(String offer_des) {
+        this.offer_des = offer_des;
+    }
+
+    public String getOffer_price() {
+        return offer_price;
+    }
+
+    public void setOffer_price(String offer_price) {
+        this.offer_price = offer_price;
+    }
+
+    public String getOffer_image() {
+        return offer_image;
+    }
+
+    public void setOffer_image(String offer_image) {
+        this.offer_image = offer_image;
+    }
+
+    private String offer_des;
+    private String offer_price;
+    private String offer_image;
 
     public String getHotel_imageUrl() {
         return hotel_imageUrl;
