@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.avalance.qwilly.Model.DbLink;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;

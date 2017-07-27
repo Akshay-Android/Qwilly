@@ -44,6 +44,7 @@ public class HotelFragment extends Fragment {
     private List<Hotel> offerList = new ArrayList<>();
     private RecyclerView recyclerView;
     private Hoffers_adapter mAdapter;
+    TextView txt_walletbal;
 
     @Nullable
     @Override
@@ -53,6 +54,9 @@ public class HotelFragment extends Fragment {
         DbLink.Back_key=1;
 
         recyclerView = (RecyclerView) view.findViewById(R.id.offer_list);
+        txt_walletbal = (TextView) view.findViewById(R.id.txt_walletbal);
+
+        txt_walletbal.setText(Html.fromHtml( "&#8377; " +"<font color=#e31c15>"+ 200+"</font>" ));
 
         mAdapter = new Hoffers_adapter(offerList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
@@ -99,7 +103,8 @@ public class HotelFragment extends Fragment {
                 urlConnection.setDoOutput(true);
 
                 String req_data= URLEncoder.encode("Content-type", "UTF-8" ) +"="+ URLEncoder.encode("application/json","UTF-8")
-                        +"&"+URLEncoder.encode("operation","UTF-8") +"="+ URLEncoder.encode("hotel_offer","UTF-8");
+                        +"&"+URLEncoder.encode("operation","UTF-8") +"="+ URLEncoder.encode("hotel_offer","UTF-8")
+                        +"&"+URLEncoder.encode("hotel_id","UTF-8") +"="+ URLEncoder.encode(String.valueOf(DbLink.Hotel_id),"UTF-8");
 
                 OutputStream os = urlConnection.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
@@ -149,9 +154,16 @@ public class HotelFragment extends Fragment {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            mAdapter = new Hoffers_adapter(offerList);
-            recyclerView.setAdapter(mAdapter);
-            mAdapter.notifyDataSetChanged();
+            if(s.equals("Server Error!"))
+            {
+
+            }else
+            {
+                mAdapter = new Hoffers_adapter(offerList);
+                recyclerView.setAdapter(mAdapter);
+                mAdapter.notifyDataSetChanged();
+            }
+
         }
     }
 
@@ -198,7 +210,6 @@ public class HotelFragment extends Fragment {
             Picasso.with(getContext())
                     .load(hotel.getOffer_image())
                     .into(holder.offer_image);
-
 
         }
 

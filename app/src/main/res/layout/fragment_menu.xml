@@ -1,6 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/colorPrimaryDark"
+        app:tabTextColor="@color/cardview_dark_background"
+        android:touchscreenBlocksFocus="true"
+        android:textAlignment="center"
+        app:tabGravity="fill"
+        android:background="@color/white"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#29000000"
+        android:layout_below="@+id/tabLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/tabLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </LinearLayout>

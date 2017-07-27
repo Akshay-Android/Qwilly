@@ -94,7 +94,7 @@ public class Prehome extends AppCompatActivity {
         @SuppressLint("SetTextI18n")
         @Override
         public void onBindViewHolder(MyViewHolder holder, int position) {
-            Hotel hotel = hotelList.get(position);
+            final Hotel hotel = hotelList.get(position);
             holder.hotel_name.setText(hotel.getHotel_name());
             holder.hotel_distance.setText(hotel.getHotel_distance()+" Km");
             holder.hotel_address.setText(hotel.getHotel_address());
@@ -108,7 +108,9 @@ public class Prehome extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
+                    DbLink.Hotel_id=hotel.getHotel_id();
                     Intent intent=new Intent(Prehome.this,Home.class);
+                  //  intent.putExtra("hotel_id",hotel.getHotel_id());
                     startActivity(intent);
 
                    /* Fragment fragment = new HotelFragment();

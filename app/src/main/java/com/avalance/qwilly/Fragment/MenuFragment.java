@@ -2,44 +2,30 @@ package com.avalance.qwilly.Fragment;
 
 import android.annotation.SuppressLint;
 import android.graphics.Typeface;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.avalance.qwilly.Model.DbLink;
-import com.avalance.qwilly.Model.Hotel;
 import com.avalance.qwilly.R;
-import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MenuFragment extends Fragment {
 
-
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -47,7 +33,51 @@ public class MenuFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
         DbLink.Back_key=2;
 
+        Toast.makeText(getContext(),"Hello Menu",Toast.LENGTH_LONG).show();
+        viewPager = (ViewPager) view.findViewById(R.id.pager);
+        tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
+        setupViewPager(viewPager);
+        tabLayout.setupWithViewPager(viewPager);
+
         return view;
+    }
+
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
+        viewPagerAdapter.addFragment(new Food(), "Food");
+        viewPagerAdapter.addFragment(new Bar(), "Bar");
+        viewPagerAdapter.addFragment(new Fastfood(), "Fastfood");
+        viewPager.setAdapter(viewPagerAdapter);
+    }
+
+    private class ViewPagerAdapter extends FragmentPagerAdapter {
+
+        List<Fragment> fragmentList = new ArrayList<>();
+        List<String> fragmentTitles = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager fragmentManager) {
+            super(fragmentManager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return fragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return fragmentList.size();
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return fragmentTitles.get(position);
+        }
+
+        public void addFragment(Fragment fragment, String name) {
+            fragmentList.add(fragment);
+            fragmentTitles.add(name);
+        }
     }
 
 

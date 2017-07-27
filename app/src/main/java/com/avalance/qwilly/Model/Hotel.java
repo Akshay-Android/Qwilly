@@ -14,8 +14,26 @@ public class Hotel {
     private String hotel_rating;
     private String hotel_phone;
     private String hotel_id;
-
     private String offer_name;
+
+    public String getMenu_id() {
+        return menu_id;
+    }
+
+    public void setMenu_id(String menu_id) {
+        this.menu_id = menu_id;
+    }
+
+    public String getMenu_type() {
+        return menu_type;
+    }
+
+    public void setMenu_type(String menu_type) {
+        this.menu_type = menu_type;
+    }
+
+    private String menu_id;
+    private String menu_type;
 
     public String getOffer_name() {
         return offer_name;
